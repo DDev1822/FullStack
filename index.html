@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exercise Tracker | freeCodeCamp</title>
+    <style>
+      body { 
+        font-family: 'Segoe UI', sans-serif; 
+        text-align: center; 
+        background-color: #f8fafc; 
+        color: #334155; 
+        margin-top: 50px; 
+      }
+      .container { 
+        max-width: 600px; 
+        margin: 0 auto; 
+        background: #ffffff; 
+        padding: 30px; 
+        border-radius: 12px; 
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); 
+      }
+      input { 
+        margin: 5px 0; 
+        padding: 10px; 
+        width: 80%; 
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+      }
+      button { 
+        padding: 10px; 
+        background-color: #2563eb; 
+        color: white; 
+        border: none; 
+        border-radius: 4px;
+        width: 84%; 
+        cursor: pointer; 
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      button:hover { background-color: #1d4ed8; }
+      form { margin-bottom: 30px; }
+      h1 { color: #0f172a; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Exercise Tracker</h1>
+      <hr />
+      <h3>Crear un Nuevo Usuario</h3>
+      <form action="/api/users" method="POST">
+        <input type="text" name="username" placeholder="Nombre de usuario" required>
+        <button type="submit">Crear Usuario</button>
+      </form>
+
+      <h3>Añadir Ejercicios</h3>
+      <form id="exercise-form" method="POST">
+        <input type="text" id="uid" placeholder="Pegar el _id del usuario aquí" required>
+        <input type="text" name="description" placeholder="Descripción (ej. Correr)*" required>
+        <input type="number" name="duration" placeholder="Duración en minutos*" required>
+        <input type="text" name="date" placeholder="Fecha opcional (yyyy-mm-dd)">
+        <button type="submit">Registrar Ejercicio</button>
+      </form>
+    </div>
+    <script>
+      const exerciseForm = document.getElementById("exercise-form");
+      exerciseForm.addEventListener("submit", (e) => {
+        const userId = document.getElementById("uid").value;
+        exerciseForm.action = `/api/users/${userId}/exercises`;
+      });
+    </script>
+  </body>
+</html>
