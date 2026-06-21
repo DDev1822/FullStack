@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>File Metadata | freeCodeCamp</title>
+    <style>
+      body { 
+        font-family: 'Segoe UI', sans-serif; 
+        text-align: center; 
+        background-color: #f8fafc; 
+        color: #334155; 
+        margin-top: 50px; 
+      }
+      .container { 
+        max-width: 500px; 
+        margin: 0 auto; 
+        background: #ffffff; 
+        padding: 30px; 
+        border-radius: 12px; 
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); 
+      }
+      input[type="file"] { 
+        margin: 15px 0; 
+        padding: 10px; 
+        border: 2px dashed #cbd5e1; 
+        border-radius: 8px; 
+        width: 90%;
+        background-color: #f1f5f9;
+        cursor: pointer;
+      }
+      button { 
+        padding: 12px; 
+        background-color: #2563eb; 
+        color: white; 
+        border: none; 
+        border-radius: 6px; 
+        width: 95%; 
+        cursor: pointer; 
+        font-weight: bold; 
+        font-size: 1rem;
+      }
+      button:hover { background-color: #1d4ed8; }
+      form { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        margin-top: 20px;
+      }
+      h1 { color: #0f172a; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>File Metadata Microservice</h1>
+      <hr />
+      <h3>Por favor, sube un archivo...</h3>
+      <!-- IMPORTANTE: enctype="multipart/form-data" es requerido para subir archivos -->
+      <form enctype="multipart/form-data" method="POST" action="/api/fileanalyse">
+        <!-- El atributo name DEBE ser "upfile" según los requerimientos -->
+        <input id="inputfield" type="file" name="upfile" required>
+        <button id="button" type="submit">Subir y Analizar</button>
+      </form>
+    </div>
+  </body>
+</html>
