@@ -13,17 +13,17 @@ const runner            = require('./test-runner');
 const app = express();
 
 // Security: CSP - Only allow scripts and CSS from this server
-app.use(function(req, res, next) {
-  res.setHeader(
-    'Content-Security-Policy',
-    "default-src 'self'; script-src 'self'; style-src 'self'"
-  );
-  next();
-});
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'"],
+    styleSrc: ["'self'"]
+  }
+}));
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
-app.use(cors({origin: '*'})); //For FCC testing purposes only
+app.use(cors({origin: '*', exposedHeaders: ['Content-Security-Policy']})); //For FCC testing purposes only
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
