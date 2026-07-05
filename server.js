@@ -16,7 +16,7 @@ const app = express();
 app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "https://code.jquery.com/jquery-3.7.1.min.js"],
+    scriptSrc: ["'self'"],
     styleSrc: ["'self'"]
   }
 }));
