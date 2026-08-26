@@ -1,0 +1,33 @@
+name: File Metadata Microservice Test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'file-metadata-microservice/**'
+      - '.github/workflows/file-metadata-microservice-test.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: file-metadata-microservice
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: file-metadata-microservice/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run HTTP tests
+        run: node test-http.js
