@@ -1,16 +1,18 @@
 # Anonymous Message Board
 
-Full-stack JavaScript implementation of the freeCodeCamp Information Security project.
+Full-stack JavaScript implementation of the freeCodeCamp Information Security project using a local SQLite database.
 
 ## Setup
 
 1. `cd anonymous-message-board`
 2. `npm install`
 3. Copy `sample.env` to `.env`.
-4. Set `DB` to a MongoDB connection string.
+4. Keep `DB=./data/messageboard.db` or change it to another local SQLite file path.
 5. Run `npm start`.
 
-Set `NODE_ENV=test` when you want the built-in freeCodeCamp-style functional test runner to execute. You can also run `npm test` while the database configured in `.env` is available.
+No MongoDB server, Atlas account, database user, password, or internet connection is required for the database. The `data` directory and SQLite database file are created automatically on first run and are ignored by Git.
+
+Set `NODE_ENV=test` when you want the built-in freeCodeCamp-style functional test runner to execute. You can also run `npm test`.
 
 ## API behavior
 
