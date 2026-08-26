@@ -16,7 +16,11 @@ const runner = require('./test-runner');
 const app = express();
 
 app.disable('x-powered-by');
-app.use(helmet());
+app.use(helmet({
+  referrerPolicy: {
+    policy: 'same-origin'
+  }
+}));
 app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
