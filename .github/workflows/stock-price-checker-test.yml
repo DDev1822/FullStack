@@ -29,12 +29,14 @@ jobs:
 
       - name: Probe stock proxy
         run: |
-          curl --silent --show-error --location \
-            --dump-header proxy-headers.txt \
-            --output proxy-body.txt \
-            --write-out '%{http_code}\n' \
-            https://stock-price-checker-proxy.freecodecamp.rocks/v1/stock/GOOG/quote \
-            > proxy-status.txt || true
+          : > proxy-probes.txt
+          for symbol in GOOG MSFT AAPL TSLA AMZN IBM META NVDA ORCL INTC NFLX; do
+            echo "--- ${symbol} ---" >> proxy-probes.txt
+            curl --silent --show-error --location \
+              --write-out '\nHTTP_STATUS:%{http_code}\n' \
+              "https://stock-price-checker-proxy.freecodecamp.rocks/v1/stock/${symbol}/quote" \
+              >> proxy-probes.txt || true
+          done
 
       - name: Start server
         run: |
@@ -47,10 +49,8 @@ jobs:
       - name: Show diagnostics on failure
         if: failure()
         run: |
-          echo '--- Proxy status ---'
-          cat proxy-status.txt || true
-          echo '--- Proxy body ---'
-          cat proxy-body.txt || true
+          echo '--- Proxy probes ---'
+          cat proxy-probes.txt || true
           echo '--- CI result ---'
           cat ci-result.json || true
           echo '--- Server log ---'
@@ -62,9 +62,7 @@ jobs:
         with:
           name: stock-price-checker-diagnostics
           path: |
-            stock-price-checker/proxy-status.txt
-            stock-price-checker/proxy-headers.txt
-            stock-price-checker/proxy-body.txt
+            stock-price-checker/proxy-probes.txt
             stock-price-checker/ci-result.json
             stock-price-checker/server.log
           if-no-files-found: warn
