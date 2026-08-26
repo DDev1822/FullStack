@@ -1,0 +1,18 @@
+{
+  "name": "american-british-translator",
+  "version": "1.0.0",
+  "description": "freeCodeCamp American/British English Translator solution",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha --timeout 5000 --exit --ui tdd tests/"
+  },
+  "dependencies": {
+    "chai": "^4.5.0",
+    "chai-http": "^4.4.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mocha": "^10.7.3"
+  },
+  "license": "MIT"
+}
