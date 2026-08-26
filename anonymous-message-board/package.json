@@ -1,0 +1,22 @@
+{
+  "name": "anonymous-message-board",
+  "version": "1.0.0",
+  "description": "freeCodeCamp Anonymous Message Board project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha --ui tdd tests/2_functional-tests.js --timeout 15000"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "chai": "^4.5.0",
+    "chai-http": "^4.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "mocha": "^10.8.2",
+    "mongoose": "^8.9.5"
+  },
+  "license": "MIT"
+}

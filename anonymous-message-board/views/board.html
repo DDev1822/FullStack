@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Board · Anonymous Message Board</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <script src="/public/board.js" defer></script>
+</head>
+<body>
+  <main>
+    <p><a href="/">← Home</a></p>
+    <header>
+      <h1 id="board-name">Board</h1>
+      <p>Anonymous threads, newest activity first.</p>
+    </header>
+
+    <section class="card">
+      <h2>New thread</h2>
+      <form id="new-thread">
+        <textarea name="text" required placeholder="Thread text"></textarea>
+        <input type="password" name="delete_password" required placeholder="Delete password">
+        <button type="submit">Create thread</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Recent threads</h2>
+      <div id="threads">Loading…</div>
+    </section>
+  </main>
+</body>
+</html>

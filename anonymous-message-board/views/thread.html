@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thread · Anonymous Message Board</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <script src="/public/thread.js" defer></script>
+</head>
+<body>
+  <main>
+    <p><a id="back-link" href="/">← Board</a></p>
+    <header>
+      <h1 id="thread-heading">Thread</h1>
+    </header>
+
+    <section id="thread" class="card">Loading…</section>
+
+    <section class="card">
+      <h2>New reply</h2>
+      <form id="new-reply">
+        <textarea name="text" required placeholder="Reply text"></textarea>
+        <input type="password" name="delete_password" required placeholder="Delete password">
+        <button type="submit">Post reply</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
