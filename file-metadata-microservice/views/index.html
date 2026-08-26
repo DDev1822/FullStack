@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Metadata Microservice</title>
+    <link
+      rel="shortcut icon"
+      href="https://cdn.freecodecamp.org/universal/favicons/favicon-32x32.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="/public/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>API Project: File Metadata Microservice</h1>
+      <p class="intro">
+        Upload a file to obtain its original name, MIME type, and size in bytes.
+      </p>
+
+      <section class="view" aria-labelledby="upload-title">
+        <h2 id="upload-title">Upload a file</h2>
+        <form
+          enctype="multipart/form-data"
+          method="POST"
+          action="/api/fileanalyse"
+        >
+          <label for="inputfield">Choose file</label>
+          <input id="inputfield" type="file" name="upfile" required />
+          <input id="button" type="submit" value="Upload" />
+        </form>
+      </section>
+
+      <section class="api-note" aria-labelledby="api-title">
+        <h2 id="api-title">API endpoint</h2>
+        <code>POST /api/fileanalyse</code>
+        <p>Multipart field name: <code>upfile</code></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>freeCodeCamp File Metadata Microservice project</p>
+    </footer>
+  </body>
+</html>
