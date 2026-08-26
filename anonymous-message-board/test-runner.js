@@ -7,8 +7,13 @@ const fs = require('fs');
 const path = require('path');
 
 const emitter = new EventEmitter();
+emitter.running = false;
+emitter.report = null;
 
 emitter.run = function () {
+  if (emitter.running) return;
+  emitter.running = true;
+
   const mocha = new Mocha({ ui: 'tdd', timeout: 15000 });
   const testDir = path.join(__dirname, 'tests');
 
@@ -41,6 +46,7 @@ emitter.run = function () {
     })
     .on('end', function () {
       emitter.report = tests;
+      emitter.running = false;
       emitter.emit('done', tests);
     });
 };
