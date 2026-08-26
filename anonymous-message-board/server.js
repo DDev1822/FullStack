@@ -7,8 +7,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
-const mongoose = require('mongoose');
 
+const db = require('./db');
 const apiRoutes = require('./routes/api');
 const fccTestingRoutes = require('./routes/fcctesting');
 const runner = require('./test-runner');
@@ -41,19 +41,8 @@ app.use(function (req, res) {
   res.status(404).type('text').send('Not Found');
 });
 
-if (process.env.DB) {
-  mongoose.connect(process.env.DB)
-    .then(function () {
-      console.log('Connected to MongoDB');
-    })
-    .catch(function (error) {
-      console.error('MongoDB connection error:', error.message);
-    });
-} else {
-  console.warn('DB is not set. Add a MongoDB connection string to .env before using the API.');
-}
-
 const listener = app.listen(process.env.PORT || 3000, function () {
+  console.log('SQLite database: ' + db.name);
   console.log('Your app is listening on port ' + listener.address().port);
 
   if (process.env.NODE_ENV === 'test' && require.main === module) {
