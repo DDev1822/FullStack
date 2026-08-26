@@ -20,16 +20,18 @@ module.exports = function (app) {
     });
   });
 
-  app.get('/_api/get-tests', cors(), function (req, res, next) {
-    if (process.env.NODE_ENV === 'test') return next();
-    res.json({ status: 'unavailable' });
-  }, function (req, res, next) {
-    if (!runner.report) return next();
-    res.json(testFilter(runner.report, req.query.type, req.query.n));
-  }, function (req, res) {
+  app.get('/_api/get-tests', cors(), function (req, res) {
+    if (runner.report) {
+      return res.json(testFilter(runner.report, req.query.type, req.query.n));
+    }
+
     runner.once('done', function () {
-      res.json(testFilter(runner.report, req.query.type, req.query.n));
+      res.json(testFilter(runner.report || [], req.query.type, req.query.n));
     });
+
+    if (!runner.running) {
+      runner.run();
+    }
   });
 
   app.get('/_api/app-info', function (req, res) {
