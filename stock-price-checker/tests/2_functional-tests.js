@@ -55,11 +55,15 @@ suite('Functional Tests', function () {
     chai
       .request(server)
       .get('/api/stock-prices')
-      .query({ stock: ['MSFT', 'AAPL'] })
+      .query({ stock: ['GOOG', 'IBM'] })
       .end(function (err, res) {
         assert.equal(res.status, 200);
         assert.isArray(res.body.stockData);
         assert.lengthOf(res.body.stockData, 2);
+        assert.equal(res.body.stockData[0].stock, 'GOOG');
+        assert.equal(res.body.stockData[1].stock, 'IBM');
+        assert.isNumber(res.body.stockData[0].price);
+        assert.isNumber(res.body.stockData[1].price);
         assert.property(res.body.stockData[0], 'rel_likes');
         assert.property(res.body.stockData[1], 'rel_likes');
         assert.equal(res.body.stockData[0].rel_likes, -res.body.stockData[1].rel_likes);
@@ -71,11 +75,15 @@ suite('Functional Tests', function () {
     chai
       .request(server)
       .get('/api/stock-prices')
-      .query({ stock: ['TSLA', 'AMZN'], like: true })
+      .query({ stock: ['GOOG', 'IBM'], like: true })
       .end(function (err, res) {
         assert.equal(res.status, 200);
         assert.isArray(res.body.stockData);
         assert.lengthOf(res.body.stockData, 2);
+        assert.equal(res.body.stockData[0].stock, 'GOOG');
+        assert.equal(res.body.stockData[1].stock, 'IBM');
+        assert.isNumber(res.body.stockData[0].price);
+        assert.isNumber(res.body.stockData[1].price);
         assert.equal(res.body.stockData[0].rel_likes, 0);
         assert.equal(res.body.stockData[1].rel_likes, 0);
         done(err);

@@ -30,7 +30,7 @@ jobs:
       - name: Probe stock proxy
         run: |
           : > proxy-probes.txt
-          for symbol in GOOG MSFT AAPL TSLA AMZN IBM META NVDA ORCL INTC NFLX; do
+          for symbol in GOOG IBM; do
             echo "--- ${symbol} ---" >> proxy-probes.txt
             curl --silent --show-error --location \
               --write-out '\nHTTP_STATUS:%{http_code}\n' \

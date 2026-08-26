@@ -8,14 +8,16 @@ Exponer `GET /api/stock-prices` para consultar precios actuales mediante el prox
 
 ## API
 
-Ejemplos:
+Ejemplos verificados con símbolos que el proxy oficial está resolviendo actualmente:
 
 - `/api/stock-prices?stock=GOOG`
 - `/api/stock-prices?stock=GOOG&like=true`
-- `/api/stock-prices?stock=GOOG&stock=MSFT`
-- `/api/stock-prices?stock=GOOG&stock=MSFT&like=true`
+- `/api/stock-prices?stock=GOOG&stock=IBM`
+- `/api/stock-prices?stock=GOOG&stock=IBM&like=true`
 
 Para una acción se devuelve `stock`, `price` y `likes`. Para dos acciones se devuelve un arreglo con `stock`, `price` y `rel_likes`.
+
+La disponibilidad de cada ticker depende del proxy oficial. Un símbolo que el upstream no reconozca no se sustituye ni se inventa.
 
 ## Privacidad
 
