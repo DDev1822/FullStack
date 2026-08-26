@@ -1,5 +1,6 @@
 'use strict';
 
+const analyser = require('./assertion-analyser');
 const EventEmitter = require('events').EventEmitter;
 const Mocha = require('mocha');
 const fs = require('fs');
@@ -16,14 +17,27 @@ emitter.run = function () {
     .forEach(function (file) { mocha.addFile(path.join(testDir, file)); });
 
   const tests = [];
+  let context = '';
+  const separator = ' -> ';
 
   mocha.run()
     .on('test end', function (test) {
+      let body = test.body || '';
+      body = body.replace(/\/\/.*\n|\/\*[\s\S]*?\*\//g, '');
+      body = body.replace(/\s+/g, ' ');
+
       tests.push({
         title: test.title,
-        context: test.parent ? test.parent.fullTitle() : '',
-        state: test.state
+        context: context.slice(0, -separator.length),
+        state: test.state,
+        assertions: analyser(body)
       });
+    })
+    .on('suite', function (suite) {
+      context += suite.title + separator;
+    })
+    .on('suite end', function (suite) {
+      context = context.slice(0, -(suite.title.length + separator.length));
     })
     .on('end', function () {
       emitter.report = tests;
