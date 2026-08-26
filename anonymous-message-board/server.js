@@ -56,7 +56,7 @@ if (process.env.DB) {
 const listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 
-  if (process.env.NODE_ENV === 'test') {
+  if (process.env.NODE_ENV === 'test' && require.main === module) {
     setTimeout(function () {
       try {
         runner.run();
